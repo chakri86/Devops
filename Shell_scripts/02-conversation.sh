@@ -33,3 +33,13 @@ echo "$person1: how are you?"
 echo "$person1: what is your name?"
 echo "$person2: where are you from?"    
 echo "$person2: what is your favorite color?"
+
+
+person3=$1
+person4=$2    
+
+echo "$person3: how are you?"
+echo "$person3: what is your name?"
+echo "$person4: where are you from?"    
+echo "$person4: what is your favorite color?"
+

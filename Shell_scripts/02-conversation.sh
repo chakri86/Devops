@@ -21,3 +21,15 @@ echo "what is your favorite programming language?"
 echo "what is your favorite operating system?"
 echo "what is your favorite web browser?"
 
+echo "chakri: how are you?"
+echo "chakri: what is your name?" 
+echo "kalyan: where are you from?" 
+
+
+pers1on1="chakri"
+person2="kalyan"    
+
+echo "$person1: how are you?"
+echo "$person1: what is your name?"
+echo "$person2: where are you from?"    
+echo "$person2: what is your favorite color?"

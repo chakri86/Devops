@@ -26,7 +26,7 @@ echo "chakri: what is your name?"
 echo "kalyan: where are you from?" 
 
 
-pers1on1="chakri"
+person1="chakri"
 person2="kalyan"    
 
 echo "$person1: how are you?"

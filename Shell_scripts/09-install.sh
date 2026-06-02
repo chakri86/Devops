@@ -15,10 +15,11 @@ fi
 echo "iam continuing with the rest of the script"
 
 echo "installing the software..."
-dnf install mysqlweer -y
+dnf install mysqler -y
 
 if [ $? -eq 0 ]; then
     echo "software installed successfully"
 else
     echo "software installation failed"
+    exit 1
 fi

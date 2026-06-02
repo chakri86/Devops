@@ -10,7 +10,7 @@ echo " second variable: $2"
 echo " who is runnuing the script: $USER"
 echo " home directory of the user: $HOME"
 echo " current working directory: $PWD"
-echo " exit status of the last command: $?"
+echo " exit status of the last command: $?" ## 0 is the successful exit status and non-zero is the failure exit status
 sleep 2 &
 echo " process id of the current script: $$"
 echo " last background process id: $!"

@@ -11,9 +11,9 @@ echo "num3: $num3"
 sum1=$((num1 + num3))
 sum2=$((num1 + num2))
 sum3=$((num1+ num2 + num3))
-echo "sum1: $sum1"
-echo "sum2: $sum2"
-echo "sum3: $sum3"
+echo "num1 + num3: $sum1"
+echo "num1 + num2: $sum2"
+echo "num1 + num2 + num3: $sum3"
 
 movies=("movie1" "movie2" "movie3")
 echo "movies: ${movies[@]}"

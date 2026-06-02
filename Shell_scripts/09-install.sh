@@ -7,6 +7,7 @@ if [ $userid -eq 0 ]; then
     echo "you are root user, you can install the software"
 else
     echo "you are not root user, you cannot install the software"
+    exit 1
 fi
 
-echo iam continuing with the rest of the script
+echo "iam continuing with the rest of the script"

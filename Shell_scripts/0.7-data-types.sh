@@ -1,6 +1,9 @@
 #!/bin/bash
 num1=10
 num2=chakri
+echo "num1: $num1"
+echo "num2: $num2"
+
 sum=$((num1 + num2))
 
 echo "sum: $sum"

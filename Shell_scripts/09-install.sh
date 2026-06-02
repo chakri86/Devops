@@ -14,12 +14,19 @@ fi
 
 echo "iam continuing with the rest of the script"
 
-echo "installing the software..."
-dnf install mysql -y
+dnf list installed mysql
 
 if [ $? -eq 0 ]; then
-    echo "software installed successfully"
+    echo "software is already installed"
+    exit 0
 else
-    echo "software installation failed"
-    exit 1
+    echo "software is not installed, installing the software..."
+    dnf install mysql -y
+
+    if [ $? -eq 0 ]; then
+        echo "software installed successfully"
+    else
+        echo "software installation failed"
+        exit 1
+    fi    
 fi

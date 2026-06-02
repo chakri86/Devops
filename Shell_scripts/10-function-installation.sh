@@ -25,11 +25,9 @@ dnf list installed mysql
 
 if [ $? -eq 0 ]; then
     echo "software is already installed"
-    exit 0
 else
     echo "software is not installed, installing the software..."
     dnf install mysql -y
-
     validate "mysql" $?
 fi
 
@@ -39,10 +37,8 @@ dnf list installed nginx
 
 if [ $? -eq 0 ]; then
     echo "software is already installed"
-    exit 0
 else
     echo "software is not installed, installing the software..."
     dnf install nginx -y
-
     validate "nginx" $?
 fi

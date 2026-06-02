@@ -21,6 +21,7 @@ if [ $? -eq 0 ]; then
     exit 0
 else
     echo "software is not installed, installing the software..."
+    echo "installing the software..."
     dnf install mysql -y
 
     if [ $? -eq 0 ]; then

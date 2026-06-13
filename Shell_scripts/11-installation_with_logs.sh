@@ -29,24 +29,24 @@ validate(){
 
 # myql installation
 
-dnf list installed mysql
+dnf list installed mysql &>> $log_file
 
 if [ $? -eq 0 ]; then
     echo "software is already installed"
 else
     echo "software is not installed, installing the software..."
-    dnf install mysql -y 
+    dnf install mysql -y &>> $log_file
     validate "mysql" $?
 fi
 
 # nginx installation
 
-dnf list installed nginx 
+dnf list installed nginx &>> $log_file
 
 if [ $? -eq 0 ]; then
     echo "software is already installed"
 else
     echo "software is not installed, installing the software..."
-    dnf install nginx -y 
+    dnf install nginx -y &>> $log_file
     validate "nginx" $?
 fi

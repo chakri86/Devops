@@ -7,13 +7,19 @@ log_file="$logs_dir/$0.log"
 
 time_stamp=$(date "+%Y-%b-%d %H:%M:%S %Z") # we are getting the current date and time and storing it in a variable
 
-
+R= "\e[31m" # red color
+G= "\e[32m" # green color
+P= "\e[35m" # purple color
+B= "\e[34m" # blue color
+Y= "\e[33m" # yellow color
+C= "\e[36m" # cyan color
+N= "\e[0m"  # no color
 
 #chekc if the user is root or not
 if [ $userid -eq 0 ]; then
     echo "$time_stamp [INFO] you are root user, you can install the software"
 else
-    echo "$time_stamp [ERROR] you are not root user, you cannot install the software"
+    echo "$time_stamp [ERROR] you are not root user, you $R cannot install the software $N"
     exit 1
 fi
 
@@ -22,7 +28,7 @@ validate(){
     if [ $2 -eq 0 ]; then
         echo "$time_stamp [SUCCESS] $1 installed successfully" | tee -a $log_file # we are redirecting the output of this command to the log file
     else
-        echo "$time_stamp [ERROR] $1 installation failed" | tee -a $log_file # we are redirecting the output of this command to the log file
+        echo "$time_stamp [ERROR] $1 installation $R failed $N" | tee -a $log_file # we are redirecting the output of this command to the log file
         exit 1
     fi 
 }
@@ -34,7 +40,7 @@ do
     if [ $? -eq 0 ]; then
         echo "$time_stamp [INFO] software is already installed" | tee -a $log_file # we are redirecting the output of this command to the log file
     else
-        echo "$time_stamp software is not installed, installing the software..."
+        echo "$time_stamp software is $C not installed $N, installing the software..."
         dnf install $package -y &>> $log_file # we are redirecting the output of this command to the log file
         validate "Installing $package" $?
     fi

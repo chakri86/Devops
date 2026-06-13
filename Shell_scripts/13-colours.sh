@@ -38,7 +38,7 @@ do
     #echo " installing $package "
     dnf list installed $package &>> $log_file # we are redirecting the output of this command to the log file
     if [ $? -eq 0 ]; then
-        echo "$time_stamp [INFO] software is already installed" | tee -a $log_file # we are redirecting the output of this command to the log file
+        echo -e "$time_stamp [INFO] software is $p already installed $N" | tee -a $log_file # we are redirecting the output of this command to the log file
     else
         echo -e "$time_stamp software is $C not installed $N, installing the software..."
         dnf install $package -y &>> $log_file # we are redirecting the output of this command to the log file

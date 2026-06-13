@@ -11,9 +11,9 @@ time_stamp=$(date "+%Y-%b-%d %H:%M:%S %Z") # we are getting the current date and
 
 #chekc if the user is root or not
 if [ $userid -eq 0 ]; then
-    echo "you are root user, you can install the software"
+    echo " $time_stamp [INFO] you are root user, you can install the software"
 else
-    echo "you are not root user, you cannot install the software"
+    echo "$time_stamp [ERROR] you are not root user, you cannot install the software"
     exit 1
 fi
 
@@ -32,7 +32,7 @@ do
     echo " installing $package "
     dnf list installed $package &>> $log_file # we are redirecting the output of this command to the log file
     if [ $? -eq 0 ]; then
-        echo "$time_stamp [WARNING] software is already installed" | tee -a $log_file # we are redirecting the output of this command to the log file
+        echo "$time_stamp [INFO] software is already installed" | tee -a $log_file # we are redirecting the output of this command to the log file
     else
         echo "$time_stamp software is not installed, installing the software..."
         dnf install $package -y &>> $log_file # we are redirecting the output of this command to the log file

@@ -29,24 +29,24 @@ validate(){
 
 # myql installation
 
-dnf list installed mysql &>> $log_file
+dnf list installed mysql &>> $log_file # we are redirecting the output of this command to the log file
 
 if [ $? -eq 0 ]; then
     echo "software is already installed"
 else
     echo "software is not installed, installing the software..."
-    dnf install mysql -y &>> $log_file
+    dnf install mysql -y &>> $log_file # we are redirecting the output of this command to the log file
     validate "mysql" $?
 fi
 
 # nginx installation
 
-dnf list installed nginx &>> $log_file
+dnf list installed nginx &>> $log_file # we are redirecting the output of this command to the log file
 
 if [ $? -eq 0 ]; then
     echo "software is already installed"
 else
     echo "software is not installed, installing the software..."
-    dnf install nginx -y &>> $log_file
+    dnf install nginx -y &>> $log_file # we are redirecting the output of this command to the log file
     validate "nginx" $?
 fi

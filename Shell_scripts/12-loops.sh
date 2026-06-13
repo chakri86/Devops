@@ -20,19 +20,19 @@ fi
 #we keept his repeated code in a function and we will call the function whenever we need to validate the installation of the software
 validate(){
     if [ $2 -eq 0 ]; then
-        echo "$time_stamp $1installed successfully" | tee -a $log_file # we are redirecting the output of this command to the log file
+        echo "$time_stamp [SUCCESS] $1 installed successfully" | tee -a $log_file # we are redirecting the output of this command to the log file
     else
-        echo "$time_stamp $1 installation failed" | tee -a $log_file # we are redirecting the output of this command to the log file
+        echo "$time_stamp [ERROR] $1 installation failed" | tee -a $log_file # we are redirecting the output of this command to the log file
         exit 1
     fi 
 }
 
 for package in $@
 do 
-    echo " installin $package "
+    echo " installing $package "
     dnf list installed $package &>> $log_file # we are redirecting the output of this command to the log file
     if [ $? -eq 0 ]; then
-        echo "$time_stamp software is already installed" | tee -a $log_file # we are redirecting the output of this command to the log file
+        echo "$time_stamp [WARNING] software is already installed" | tee -a $log_file # we are redirecting the output of this command to the log file
     else
         echo "$time_stamp software is not installed, installing the software..."
         dnf install $package -y &>> $log_file # we are redirecting the output of this command to the log file

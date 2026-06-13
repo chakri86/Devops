@@ -1,8 +1,13 @@
 #!/bin/bash
 
 userid=$(id -u)
-logs_dir=/home/ec2-user/logs
+logs_dir=/home/ec2-user/logs  # log file directory
+
+
+
 log_file="$logs_dir/$0.log"
+
+
 
 #chekc if the user is root or not
 if [ $userid -eq 0 ]; then
@@ -12,6 +17,7 @@ else
     exit 1
 fi
 
+#we keept his repeated code in a function and we will call the function whenever we need to validate the installation of the software
 validate(){
     if [ $2 -eq 0 ]; then
         echo "$1installed successfully"

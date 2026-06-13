@@ -27,6 +27,14 @@ validate(){
 
 for package in $@
 do 
-    echo "checking if $package is installed or not..."
+    echo " installin $package "
+    dnf list installed $package &>> $log_file # we are redirecting the output of this command to the log file
+    if [ $? -eq 0 ]; then
+        echo "software is already installed" | tee -a $log_file # we are redirecting the output of this command to the log file
+    else
+        echo "software is not installed, installing the software..."
+        dnf install $package -y &>> $log_file # we are redirecting the output of this command to the log file
+        validate "Installing $package" $?
+    fi
 done
 

@@ -20,9 +20,9 @@ fi
 #we keept his repeated code in a function and we will call the function whenever we need to validate the installation of the software
 validate(){
     if [ $2 -eq 0 ]; then
-        echo "$1installed successfully"
+        echo "$1installed successfully" | tee -a $log_file # we are redirecting the output of this command to the log file
     else
-        echo "$1 installation failed"
+        echo "$1 installation failed" | tee -a $log_file # we are redirecting the output of this command to the log file
         exit 1
     fi 
 }

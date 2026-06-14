@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+set -e # this will exit the script if any command returns a non-zero exit code
 
 echo "hello world"
 

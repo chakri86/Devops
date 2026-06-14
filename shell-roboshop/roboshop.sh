@@ -11,7 +11,7 @@ do
         --image-id ami-0220d79f3f480ecf5 \
         --instance-type t3.micro \
         --security-groups roboshop-common\
-        --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value="roboshop-$instance"}]' \
+        --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=roboshop-$instance}]" \
         --query 'Instances[0].InstanceId' \
         --output text
     )
@@ -34,9 +34,10 @@ do
     fi
     ## updating Route53 record
     aws route53 change-resource-record-sets \
-        --hosted-zone-id $zone_id \
-        --change-batch '{
-            "comment": "Updating record for $instance" and IP",
+    --hosted-zone-id $zone_id \
+    --change-batch '
+        {
+            "Comment": "Updating record for new IP address",
             "Changes": [
                 {
                     "Action": "UPSERT",
@@ -52,5 +53,7 @@ do
                     }
                 }
             ]
-        }'
+        }
+    '
+    
 done

@@ -37,6 +37,8 @@ validate $? "Copying MongoDB repo file"
 dnf install mongodb-org -y &>> $log_file
 validate $? "Installing MongoDB"
 
+systemctl enable --now mongod 
+validate $? "Starting and Enabling MongoDB service"
 
 
 

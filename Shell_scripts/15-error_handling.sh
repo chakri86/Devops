@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 userid=$(id -u)
 logs_dir=/home/ec2-user/logs  # log file directory
 

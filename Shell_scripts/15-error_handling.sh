@@ -17,7 +17,7 @@ Y="\e[33m" # yellow color
 C="\e[36m" # cyan color
 N="\e[0m"  # no color
 
-trap 'echo "error occurred at line $LINENO while executing: $BASH_COMMAND $N"' ERR
+trap 'echo "error occurred at line $LINENO while executing: $BASH_COMMAND"' ERR
 
 #chekc if the user is root or not
 if [ $userid -eq 0 ]; then
@@ -33,7 +33,7 @@ do
     echo "$time_stamp [INFO] installing $package "
     dnf list installed $package &>> $log_file # we are redirecting the output of this command to the log file
     if [ $? -eq 0 ]; then
-        echo "$time_stamp [INFO] $package is already installed" | tee -a $log_file # we are redirecting the output of this command to the log file
+        echo "$time_stamp [INFO] $package is already installed" 
     else
         echo -e "$time_stamp software is $C not installed $N, installing the software..."
         dnf install $package -y &>> $log_file # we are redirecting the output of this command to the log file

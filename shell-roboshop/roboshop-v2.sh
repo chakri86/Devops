@@ -98,6 +98,14 @@ do
             }
         '
         echo -e "$time_stamnp [INFO] $G : Route53 record $R53_Record updated with IP: $IP $N"
+   else
+         if [ $instance_id != "None" ]; then
+              echo -e "$time_stamnp [INFO] $G : Deleting instance roboshop-$instance with ID: $instance_id $N"
+              aws ec2 terminate-instances --instance-ids $instance_id
+              echo -e "$time_stamnp [INFO] $G : Instance roboshop-$instance with ID: $instance_id terminated $N"
+         else
+              echo -e "$time_stamnp [INFO] $Y : Instance roboshop-$instance does not exist, skipping deletion. $N"
+         fi
    fi
 done
 

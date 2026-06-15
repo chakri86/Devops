@@ -6,7 +6,7 @@ sudo mkdir -p $log_folder
 sudo chown -R ec2-user:ec2-user $log_folder
 sudo chmod -R 755 $log_folder
 log_file="$log_folder/$0.log"
-script_directory=$pwd
+script_directory=$PWD
 
 usr_id=$(id -u)
 
@@ -63,7 +63,6 @@ cd /app
 unzip /tmp/catalogue.zip &>> $log_file
 validate $? "Extracting catalogue application code"
 
-cd /app
 npm install &>> $log_file
 validate $? "Installing catalogue application dependencies"
 

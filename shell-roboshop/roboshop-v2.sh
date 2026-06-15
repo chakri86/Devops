@@ -47,9 +47,54 @@ do
             --query 'Instances[0].InstanceId' \
             --output text
             )
-            echo -e "$time_stamnp [INFO] $G : Instance roboshop-$instance created  $N" 
+
+            echo -e "$time_stamnp [INFO] $G : Instance roboshop-$instance with ID: $instance_id $N" 
+
+            ##update route53
+
+            if [ "$instance" == "frontend" ]; then
+                IP=$(aws ec2 describe-instances \
+                --instance-ids $Instance_id \
+                --query 'Reservations[*].Instances[*].PublicIpAddress' \
+                --output text
+                )
+                R53_Record="$domine_name"
+            else
+                IP=$(aws ec2 describe-instances \
+                --instance-ids $Instance_id \
+                --query 'Reservations[*].Instances[*].PrivateIpAddress' \
+                --output text
+                )  
+                R53_Record="$instance.$domine_name"  
+            fi
+
+            ## updating Route53 record
+            aws route53 change-resource-record-sets \
+            --hosted-zone-id $zone_id \
+            --change-batch '
+                {
+                    "Comment": "Updating record for new IP address",
+                    "Changes": [
+                        {
+                            "Action": "UPSERT",
+                            "ResourceRecordSet": {
+                                "Name": "'$R53_Record'",
+                                "Type": "A",
+                                "TTL": 1,
+                                "ResourceRecords": [
+                                    {
+                                        "Value": "'$IP'"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            '
+            echo -e "$time_stamnp [INFO] $G : Route53 record $R53_Record updated with IP: $IP $N"
        else
             echo -e "$time_stamnp [INFO] $Y : Instance roboshop-$instance already exists with ID: $instance_id $N" 
        fi
    fi
 done
+

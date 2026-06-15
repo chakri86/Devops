@@ -30,7 +30,7 @@ fi
 
 get_instance_id() {
     name=$1
-    aws ec2 describe-instances --filters "Name=tag:Name,Values=shell" "Name=instance-state-name,Values=running" --query "Reservations[0].Instances[0].InstanceId" --output text
+    aws ec2 describe-instances --filters "Name=tag:Name,Values=roboshop-$name" "Name=instance-state-name,Values=running" --query "Reservations[0].Instances[0].InstanceId" --output text
 }
 
 for instance in $@
@@ -46,8 +46,8 @@ do
             --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=roboshop-$instance}]" \
             --query 'Instances[0].InstanceId' \
             --output text
-        )
-           echo -e "$time_stamnp [INFO] $G : Instance roboshop-$instance created with ID: $instance_id $N" | tee -a $log_file
+            )
+           echo -e "$time_stamnp [INFO] $G : Instance roboshop-$instance created  $N" | tee -a $log_file
        else
            echo -e "$time_stamnp [INFO] $Y : Instance roboshop-$instance already exists with ID: $instance_id $N" | tee -a $log_file
        fi

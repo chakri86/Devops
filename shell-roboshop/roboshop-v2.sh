@@ -12,8 +12,8 @@ time_stamnp=$(date "+%Y-%b-%d %H:%M:%S %Z")
 
 ###validation function
 if [ $# -lt 2 ]; then
-  echo  -e "$time_stamnp [ERROR] $R : atleast 2 arguments required $N" | tee -a $log_file
-  echo "Usage: $0 [create|delete] [instance1] [instance2] ..." | tee -a $log_file
+  echo  -e "$time_stamnp [ERROR] $R : atleast 2 arguments required $N" 
+  echo "Usage: $0 [create|delete] [instance1] [instance2] ..." 
   exit 1
 fi
 
@@ -23,8 +23,8 @@ shift   # Remove the first argument so that $@ now contains only the instance na
 
 
 if [ "$action" != "create" ] && [ "$action" != "delete" ]; then
-    echo  -e "$time_stamnp [ERROR] $R : Invalid action specified. Use 'create' or 'delete'. $N" | tee -a $log_file
-    echo "Usage: $0 [create|delete] [instance1] [instance2] ..." | tee -a $log_file
+    echo  -e "$time_stamnp [ERROR] $R : Invalid action specified. Use 'create' or 'delete'. $N" 
+    echo "Usage: $0 [create|delete] [instance1] [instance2] ..." 
     exit 1
 fi
 
@@ -38,8 +38,8 @@ do
    instance_id=$(get_instance_id $instance)
    if [ $action == "create" ]; then
        if [ $instance_id == "None"]; then
-           echo -e "$time_stamnp [INFO] $G : Creating instance roboshop-$instance $N" | tee -a $log_file
-           instance_id=$(aws ec2 run-instances \
+           echo -e "$time_stamnp [INFO] $G : Creating instance roboshop-$instance $N"
+           instance_id=$( aws ec2 run-instances \
             --image-id ami-0220d79f3f480ecf5 \
             --instance-type t3.micro \
             --security-groups roboshop-common roboshop-$instance\
@@ -47,9 +47,9 @@ do
             --query 'Instances[0].InstanceId' \
             --output text
             )
-           echo -e "$time_stamnp [INFO] $G : Instance roboshop-$instance created  $N" | tee -a $log_file
+            echo -e "$time_stamnp [INFO] $G : Instance roboshop-$instance created  $N" 
        else
-           echo -e "$time_stamnp [INFO] $Y : Instance roboshop-$instance already exists with ID: $instance_id $N" | tee -a $log_file
+            echo -e "$time_stamnp [INFO] $Y : Instance roboshop-$instance already exists with ID: $instance_id $N" 
        fi
    fi
 done

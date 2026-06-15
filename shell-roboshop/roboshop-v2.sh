@@ -67,7 +67,7 @@ do
             R53_Record="$domine_name"
         else
             IP=$(aws ec2 describe-instances \
-            --instance-ids $nstance_id \
+            --instance-ids $instance_id \
             --query 'Reservations[*].Instances[*].PrivateIpAddress' \
             --output text
             )  

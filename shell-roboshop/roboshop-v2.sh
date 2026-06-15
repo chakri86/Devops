@@ -33,22 +33,20 @@ get_instance_id() {
     aws ec2 describe-instances --filters "Name=tag:Name,Values=roboshop-$name" "Name=instance-state-name,Values=running" --query "Reservations[0].Instances[0].InstanceId" --output text
 }
 
-
-
 for instance in $@
 do
    instance_id=$(get_instance_id $instance)
    if [ $action == "create" ]; then
-       if [ $instance_id == "None" ]; then
+       if [ $instance_id == "None"]; then
            echo -e "$time_stamnp [INFO] $G : Creating instance roboshop-$instance $N" | tee -a $log_file
            instance_id=$(aws ec2 run-instances \
-           --image-id $ami_id \
-           --instance-type t3.micro \
-           --security-groups "roboshop-common" "roboshop-$instance"\
-           --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=roboshop-$instance}]" \
-           --query 'Instances[0].InstanceId' \
-           --output text
-           )
+            --image-id ami-0220d79f3f480ecf5 \
+            --instance-type t3.micro \
+            --security-groups roboshop-common roboshop-$instance\
+            --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=roboshop-$instance}]" \
+            --query 'Instances[0].InstanceId' \
+            --output text
+        )
            echo -e "$time_stamnp [INFO] $G : Instance roboshop-$instance created with ID: $instance_id $N" | tee -a $log_file
        else
            echo -e "$time_stamnp [INFO] $Y : Instance roboshop-$instance already exists with ID: $instance_id $N" | tee -a $log_file

@@ -30,3 +30,28 @@ validate() {
 }
 
 
+
+
+dnf module disable nodejs -y &>> $log_file
+
+dnf module enable nodejs:20 -y &>> $log_file
+
+dnf install nodejs -y &>> $log_file
+validate $? "Installing NodeJS:20"
+
+
+id roboshop &>> $log_file
+if [ $? -ne 0 ]; then
+  useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop
+  validate $? "Creating roboshop system user"
+ else
+  echo -e "$time_stamnp [INFO] ${Y} roboshop user already exists, skipping user creation.${N}" | tee -a $log_file
+fi 
+
+mkdir /app &>> $log_file
+validate $? "Creating application directory"
+
+
+
+
+

@@ -54,14 +54,14 @@ do
 
             if [ "$instance" == "frontend" ]; then
                 IP=$(aws ec2 describe-instances \
-                --instance-ids $Instance_id \
+                --instance-ids $instance_id \
                 --query 'Reservations[*].Instances[*].PublicIpAddress' \
                 --output text
                 )
                 R53_Record="$domine_name"
             else
                 IP=$(aws ec2 describe-instances \
-                --instance-ids $Instance_id \
+                --instance-ids $instance_id \
                 --query 'Reservations[*].Instances[*].PrivateIpAddress' \
                 --output text
                 )  

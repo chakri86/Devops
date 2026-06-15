@@ -12,7 +12,7 @@ time_stamnp=$(date "+%Y-%b-%d %H:%M:%S %Z")
 
 ###validation function
 if [ $# -lt 2 ]; then
-  echo  -e"$time_stamnp [ERROR] ${R} : atleast 2 arguments required ${N}" | tee -a $log_file
+  echo  -e "$time_stamnp [ERROR] $R : atleast 2 arguments required $N" | tee -a $log_file
   echo "Usage: $0 [create|delete] [instance1] [instance2] ..." | tee -a $log_file
   exit 1
 fi

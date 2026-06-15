@@ -50,6 +50,12 @@ do
 
             echo -e "$time_stamnp [INFO] $G : Instance roboshop-$instance with ID: $instance_id $N" 
 
+           
+       else
+            echo -e "$time_stamnp [INFO] $Y : Instance roboshop-$instance already exists with ID: $instance_id $N" 
+            
+       fi
+
         ##update route53
 
         if [ "$instance" == "frontend" ]; then
@@ -61,7 +67,7 @@ do
             R53_Record="$domine_name"
         else
             IP=$(aws ec2 describe-instances \
-            --instance-ids $instance_id \
+            --instance-ids $nstance_id \
             --query 'Reservations[*].Instances[*].PrivateIpAddress' \
             --output text
             )  
@@ -92,10 +98,6 @@ do
             }
         '
         echo -e "$time_stamnp [INFO] $G : Route53 record $R53_Record updated with IP: $IP $N"
-        
-       else
-            echo -e "$time_stamnp [INFO] $Y : Instance roboshop-$instance already exists with ID: $instance_id $N" 
-       fi
    fi
 done
 

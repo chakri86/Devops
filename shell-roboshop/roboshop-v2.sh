@@ -21,8 +21,9 @@ fi
 action=$1
 shift   # Remove the first argument so that $@ now contains only the instance names
 
-if ["$action" != "create" ] && [ "$action" != "delete" ]; then
-  echo  -e "$time_stamnp [ERROR] $R : Invalid action specified. Use 'create' or 'delete'. $N" | tee -a $log_file
-  echo "Usage: $0 [create|delete] [instance1] [instance2] ..." | tee -a $log_file
-  exit 1
+
+if [ "$action" != "create" ] && [ "$action" != "delete" ]; then
+    echo  -e "$time_stamnp [ERROR] $R : Invalid action specified. Use 'create' or 'delete'. $N" | tee -a $log_file
+    echo "Usage: $0 [create|delete] [instance1] [instance2] ..." | tee -a $log_file
+    exit 1
 fi

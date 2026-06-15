@@ -38,9 +38,9 @@ get_instance_id() {
 
 for instance in $@
 do
-   insrance_id=$(get_instance_id $instance)
+   instance_id=$(get_instance_id $instance)
    if [ "$action" == "create" ]; then
-       if [ "$insrance_id" == "None" ]; then
+       if [ "$instance_id" == "None" ]; then
            echo -e "$time_stamnp [INFO] $G : Creating instance roboshop-$instance $N" | tee -a $log_file
            instance_id=$(aws ec2 run-instances \
            --image-id $ami_id \
@@ -52,7 +52,7 @@ do
            )
            echo -e "$time_stamnp [INFO] $G : Instance roboshop-$instance created with ID: $instance_id $N" | tee -a $log_file
        else
-           echo -e "$time_stamnp [INFO] $Y : Instance roboshop-$instance already exists with ID: $insrance_id $N" | tee -a $log_file
+           echo -e "$time_stamnp [INFO] $Y : Instance roboshop-$instance already exists with ID: $instance_id $N" | tee -a $log_file
        fi
    fi
 done

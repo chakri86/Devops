@@ -1,8 +1,8 @@
 #!/bin/bash
 
-ami_id='ami-0220d79f3f480ecf5'
-zone_id='Z03373741NMWA7C0RATXM'
-domine_name='avkc.online'
+ami_id="ami-0220d79f3f480ecf5"
+zone_id="Z03373741NMWA7C0RATXM"
+domine_name="avkc.online"
 
 R="\e[31m" # Red color
 G="\e[32m" # Green color

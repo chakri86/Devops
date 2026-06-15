@@ -37,7 +37,7 @@ for instance in $@
 do
    instance_id=$(get_instance_id $instance)
    if [ $action == "create" ]; then
-       if [ $instance_id == "None"]; then
+       if [ $instance_id == "None" ]; then
            echo -e "$time_stamnp [INFO] $G : Creating instance roboshop-$instance $N"
            instance_id=$( aws ec2 run-instances \
             --image-id $ami_id \

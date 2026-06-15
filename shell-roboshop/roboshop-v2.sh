@@ -52,6 +52,7 @@ do
            )
            echo -e "$time_stamnp [INFO] $G : Instance roboshop-$instance created with ID: $instance_id $N" | tee -a $log_file
        else
+           echo -e "$time_stamnp [INFO] $Y : Instance roboshop-$instance already exists with ID: $insrance_id $N" | tee -a $log_file
        fi
    fi
 done

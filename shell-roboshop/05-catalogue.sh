@@ -90,6 +90,12 @@ if [ $index -lt 0 ]; then
   echo -e "$time_stamnp [INFO] ${Y} MongoDB user and database for catalogue already exists, skipping creation.${N}" | tee -a $log_file
 fi
 
+systemctl enable catalogue &>> $log_file
+systemctl restart catalogue &>> $log_file
+validate $? "Starting and Enabling catalogue service"
+
+
+
 
 
 

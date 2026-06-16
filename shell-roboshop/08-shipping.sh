@@ -60,6 +60,9 @@ validate $? "Extracting shipping application code"
 mvn clean package &>> $log_file
 validate $? "Installing shipping application dependencies"
 
+mv target/shipping-1.0.jar shipping.jar &>> $log_file
+validate $? "Renaming shipping application jar file"
+
 cp $script_directory/shipping.service /etc/systemd/system/shipping.service &>> $log_file
 validate $? "Copying shipping systemd service file"
 

@@ -52,7 +52,7 @@ fi
 rm -rf /app &>> $log_file
 validate $? "Removing existing application directory if it exists"
 
-mkdir /app &>> $log_file
+mkdir -p /app &>> $log_file
 validate $? "Creating application directory"
 
 rm -rf /tmp/catalogue.zip &>> $log_file

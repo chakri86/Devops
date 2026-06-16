@@ -31,15 +31,8 @@ validate() {
 }
 
 
-
-
-dnf module disable nodejs -y &>> $log_file
-
-dnf module enable nodejs:20 -y &>> $log_file
-
-dnf install nodejs -y &>> $log_file
-validate $? "Installing NodeJS:20"
-
+dnf install maven -y &>> $log_file
+validate $? "Installing Maven"
 
 id roboshop &>> $log_file
 if [ $? -ne 0 ]; then
@@ -55,40 +48,34 @@ validate $? "Removing existing application directory if it exists"
 mkdir -p /app &>> $log_file
 validate $? "Creating application directory"
 
-rm -rf /tmp/cart.zip &>> $log_file
+rm -rf /tmp/shipping.zip &>> $log_file
 validate $? "Removing existing application archive if it exists"
 
-curl -o /tmp/cart.zip https://roboshop-artifacts.s3.amazonaws.com/cart-v3.zip  &>> $log_file
+curl -o /tmp/shipping.zip https://roboshop-artifacts.s3.amazonaws.com/shipping-v3.zip  &>> $log_file
 cd /app 
-unzip /tmp/cart.zip &>> $log_file
-validate $? "Extracting cart application code"
+unzip /tmp/shipping.zip &>> $log_file
+validate $? "Extracting shipping application code"
 
-npm install &>> $log_file
-validate $? "Installing cart application dependencies"
+mvn clean package &>> $log_file
+validate $? "Installing shipping application dependencies"
 
-rm -rf /etc/systemd/system/cart.service &>> $log_file
-validate $? "Removing existing cart systemd service file if it exists"
+cp $script_directory/shipping.service /etc/systemd/system/shipping.service &>> $log_file
+validate $? "Copying shipping systemd service file"
 
-cp $script_directory/cart.service /etc/systemd/system/cart.service &>> $log_file
-validate $? "Copying cart systemd service file"
+dnf install mysql -y &>> $log_file
+validate $? "Installing MySQL client"
 
+mysql -h <MYSQL-SERVER-IPADDRESS> -uroot -pRoboShop@1 < /app/db/schema.sql &>> $log_file
+validate $? "Loading shipping database schema"
 
-systemctl enable cart &>> $log_file
-systemctl restart cart &>> $log_file
-validate $? "Starting and Enabling cart service"
+mysql -h <MYSQL-SERVER-IPADDRESS> -uroot -pRoboShop@1 < /app/db/app-user.sql &>> $log_file
+validate $? "Creating shipping database user and granting permissions"
 
+mysql -h <MYSQL-SERVER-IPADDRESS> -uroot -pRoboShop@1 < /app/db/master-data.sql &>> $log_file
+validate $? "Loading shipping database master data"
 
-
-
-
-
-
-
-
-
-
-
-
-
+systemctl enable shipping   &>> $log_file 
+systemctl start shipping  &>> $log_file
+validate $? "Starting and Enabling shipping service"
 
 

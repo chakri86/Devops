@@ -43,7 +43,7 @@ validate $? "Installing NodeJS:20"
 
 id roboshop &>> $log_file
 if [ $? -ne 0 ]; then
-  useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop
+  useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>> $log_file
   validate $? "Creating roboshop system user"
  else
   echo -e "$time_stamnp [INFO] ${Y} roboshop user already exists, skipping user creation.${N}" | tee -a $log_file
@@ -52,47 +52,30 @@ fi
 rm -rf /app &>> $log_file
 validate $? "Removing existing application directory if it exists"
 
-mkdir /app &>> $log_file
+mkdir -p /app &>> $log_file
 validate $? "Creating application directory"
 
-rm -rf /tmp/catalogue.zip &>> $log_file
+rm -rf /tmp/user.zip &>> $log_file
 validate $? "Removing existing application archive if it exists"
 
-curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip  &>> $log_file
+curl -o /tmp/user.zip https://roboshop-artifacts.s3.amazonaws.com/user-v3.zip  &>> $log_file
 cd /app 
-unzip /tmp/catalogue.zip &>> $log_file
-validate $? "Extracting catalogue application code"
+unzip /tmp/user.zip &>> $log_file
+validate $? "Extracting user application code"
 
 npm install &>> $log_file
-validate $? "Installing catalogue application dependencies"
+validate $? "Installing user application dependencies"
 
-rm -rf /etc/systemd/system/catalogue.service &>> $log_file
-validate $? "Removing existing catalogue systemd service file if it exists"
+rm -rf /etc/systemd/system/user.service &>> $log_file
+validate $? "Removing existing user systemd service file if it exists"
 
-cp $script_directory/catalogue.service /etc/systemd/system/catalogue.service &>> $log_file
-validate $? "Copying catalogue systemd service file"
+cp $script_directory/user.service /etc/systemd/system/user.service &>> $log_file
+validate $? "Copying user systemd service file"
 
-rm -rf /etc/yum.repos.d/mongo.repo &>> $log_file
-validate $? "Removing existing MongoDB repo file if it exists"
 
-cp $script_directory/mongo.repo /etc/yum.repos.d/mongo.repo &>> $log_file
-validate $? "Copying MongoDB repo file"
-
-dnf install mongodb-mongosh -y &>> $log_file
-validate $? "Installing MongoDB client"
-
-index=$(mongosh --host mongodb.avkc.online --eval 'db.getMongo().getDBNames().indexOf("catalouge")')
-
-if [ $index -lt 0 ]; then
-  mongosh --host mongodb.avkc.online </app/db/master-data.js &>> $log_file
-  validate $? "load catalogue database and collection with initial data"
- else
-  echo -e "$time_stamnp [INFO] ${Y} MongoDB user and database for catalogue already exists, skipping creation.${N}" | tee -a $log_file
-fi
-
-systemctl enable catalogue &>> $log_file
-systemctl restart catalogue &>> $log_file
-validate $? "Starting and Enabling catalogue service"
+systemctl enable user &>> $log_file
+systemctl restart user &>> $log_file
+validate $? "Starting and Enabling user service"
 
 
 

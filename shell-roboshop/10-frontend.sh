@@ -49,7 +49,7 @@ validate $? "Extracting frontend application code"
 rm -rf /etc/nginx/nginx.conf &>> $log_file
 validate $? "Removing default Nginx configuration file" 
 
-cp nginx.conf /etc/nginx/nginx.conf &>> $log_file
+cp $script_directory/nginx.conf /etc/nginx/nginx.conf &>> $log_file
 validate $? "Copying custom Nginx configuration file"
 
 systemctl enable nginx &>> $log_file

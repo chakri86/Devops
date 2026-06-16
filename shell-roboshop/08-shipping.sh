@@ -7,6 +7,7 @@ sudo chown -R ec2-user:ec2-user $log_folder
 sudo chmod -R 755 $log_folder
 log_file="$log_folder/$0.log"
 script_directory=$PWD
+MYSQL_HOST=mysql.avkc.online
 
 usr_id=$(id -u)
 
@@ -65,17 +66,20 @@ validate $? "Copying shipping systemd service file"
 dnf install mysql -y &>> $log_file
 validate $? "Installing MySQL client"
 
-mysql -h <MYSQL-SERVER-IPADDRESS> -uroot -pRoboShop@1 < /app/db/schema.sql &>> $log_file
-validate $? "Loading shipping database schema"
+mysql -h $MYSQL_HOST -u root -pRoboShop@1 -e "use cities" &>>$LOGS_FILE
+if [ $? -ne 0 ]; then
+    mysql -h $MYSQL_HOST -uroot -pRoboShop@1 < /app/db/schema.sql
+    mysql -h $MYSQL_HOST -uroot -pRoboShop@1 < /app/db/app-user.sql
+    mysql -h $MYSQL_HOST -uroot -pRoboShop@1 < /app/db/master-data.sql
+    VALIDATE $? "Data loaded"
+else
+    echo -e "$time_stamnp [INFO] ${Y} Data already loaded ... SKIPPING $N" | tee -a $log_file
+fi
 
-mysql -h <MYSQL-SERVER-IPADDRESS> -uroot -pRoboShop@1 < /app/db/app-user.sql &>> $log_file
-validate $? "Creating shipping database user and granting permissions"
 
-mysql -h <MYSQL-SERVER-IPADDRESS> -uroot -pRoboShop@1 < /app/db/master-data.sql &>> $log_file
-validate $? "Loading shipping database master data"
 
 systemctl enable shipping   &>> $log_file 
-systemctl start shipping  &>> $log_file
+systemctl restart shipping  &>> $log_file
 validate $? "Starting and Enabling shipping service"
 
 

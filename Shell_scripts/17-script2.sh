@@ -2,4 +2,4 @@
 
 echo "I am from $country"   
 
-echo  "PID of script-1:$$"
+echo  "PID of script-2:$$"

@@ -35,13 +35,13 @@ fi
 
 if [ "$1" == "all" ]; then 
     if [ "$action" == "create" ]; then
-        instance= "all_instances"
+        instances= "$all_instances"
             
     else
-        instance=$(echo $all_instances | tr ' ' '\n' | tac | tr '\n' ' ')
+        instances=$(echo $all_instances | tr ' ' '\n' | tac | tr '\n' ' ')
     fi
 else
-    instance="$@"
+    instances="$@"
 fi    
 
 
@@ -50,7 +50,7 @@ get_instance_id() {
     aws ec2 describe-instances --filters "Name=tag:Name,Values=roboshop-$name" "Name=instance-state-name,Values=running" --query "Reservations[0].Instances[0].InstanceId" --output text
 }
 
-for instance in $@
+for instance in $instances
 do
    instance_id=$(get_instance_id $instance)
    if [ $action == "create" ]; then

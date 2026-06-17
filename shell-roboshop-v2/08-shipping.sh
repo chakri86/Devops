@@ -2,6 +2,7 @@
 #!/bin/bash
 
 app_name=shipping
+MYSQL_HOST=mysql.avkc.online
 source ./common.sh
 
 check_root 

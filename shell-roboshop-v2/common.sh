@@ -5,6 +5,7 @@ sudo mkdir -p $log_folder
 sudo chown -R ec2-user:ec2-user $log_folder
 sudo chmod -R 755 $log_folder
 log_file="$log_folder/$0.log"
+script_directory=$PWD
 
 usr_id=$(id -u)
 

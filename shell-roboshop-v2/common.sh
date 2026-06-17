@@ -76,6 +76,18 @@ nodejs_setup(){
   validate $? "Installing $app_name application dependencies"
 }
 
+java_setup(){
+  dnf install maven -y &>> $log_file
+  validate $? "Installing Maven"
+
+  mvn clean package &>> $log_file
+  validate $? "Installing $app_name application dependencies"
+
+  mv target/$app_name-1.0.jar $app_name.jar &>> $log_file
+  validate $? "Renaming $app_name application jar file"
+
+}
+
 systemd_setup() {
   rm -rf /etc/systemd/system/$app_name.service &>> $log_file
   validate $? "Removing existing $app_name systemd service file if it exists"

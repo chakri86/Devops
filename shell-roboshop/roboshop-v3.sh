@@ -35,13 +35,13 @@ fi
 
 if [ "$1" == "all" ]; then 
     if [ "$action" == "create" ]; then
-        instances= "all_instances"
+        instance= "all_instances"
             
     else
-        instnaces=$(echo $all_instances | tr ' ' '\n' | tac | tr '\n' ' ')
+        instance=$(echo $all_instances | tr ' ' '\n' | tac | tr '\n' ' ')
     fi
 else
-    instances="$@"
+    instance="$@"
 fi    
 
 

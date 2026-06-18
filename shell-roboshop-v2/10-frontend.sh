@@ -27,7 +27,8 @@ validate $? "Copying custom Nginx configuration file"
 
 systemctl enable nginx &>> $log_file
 
-app_restart
+systemctl restart nginx &>> $log_file
+validate $? "Restarting Nginx service"
 
 print_total_time
 

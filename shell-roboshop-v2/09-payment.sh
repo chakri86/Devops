@@ -7,7 +7,7 @@ source ./common.sh
 check_root 
 
 
-app-setup
+app_setup
 
 python_setup
 

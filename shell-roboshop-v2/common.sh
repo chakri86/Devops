@@ -88,6 +88,21 @@ java_setup(){
 
 }
 
+python_setup(){
+  dnf install python3 gcc python3-devel -y &>> $log_file
+  validate $? "Installing Python3, GCC, and development headers"
+
+  pip3 install -r requirements.txt &>> $log_file
+  validate $? "Installing payment application dependencies"
+}
+
+ngnix_setup(){
+  dnf module disable nginx -y &>> $log_file
+  dnf module enable nginx:1.24 -y &>> $log_file
+  dnf install nginx -y &>> $log_file
+  validate $? "Installing Nginx"
+}
+
 systemd_setup() {
   rm -rf /etc/systemd/system/$app_name.service &>> $log_file
   validate $? "Removing existing $app_name systemd service file if it exists"

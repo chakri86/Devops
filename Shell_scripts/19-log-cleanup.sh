@@ -12,5 +12,12 @@ if [ -z $source_dir ];then
 fi
 
 
+#checking directory empty or not 
 
+
+if [ ! -d $source_dir]; then
+    echo "error : directory : $source_dir does not exist"
+    exit 1
+
+fi
 

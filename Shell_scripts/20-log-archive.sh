@@ -4,6 +4,10 @@ source_dir=$1
 dest_dir=$2
 days=${3:-14}
 
+time_stamp=$(date +%Y-%b-%d-%H:%M:%S)
+archive_file="$dest_dir/log_archive-$time_stamp.tar.gz"
+
+
 if [ -z "$source_dir" ] || [ -z "$dest_dir" ]; then
     echo "either source directory or destination directory empty"
     echo "usage:: $0 [source_dir] [dest_dir] [days:deafult 14]"
@@ -32,3 +36,6 @@ while IFS= read -r file
 do
     echo "$file"
 done <<< "$files"
+
+
+tar -czvf $archive_file $files

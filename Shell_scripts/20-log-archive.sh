@@ -1,0 +1,21 @@
+#!/bin/bash
+
+source_dir=$1
+dest_dir=$2
+days=${3:-14}
+
+if [ -z "$source_dir" ] || [ -z "$dest_dir" ]; then
+    echo "either source directory or destination directory empty"
+    echo "usage:: $0 [source_dir] [dest_dir] [days:deafult 14]"
+    exit 1
+fi
+
+if [ ! -d "$source_dir" ]; then
+    echo "source directory $source_dir doesn not exist"
+    exit 1 
+fi
+
+if [ ! -d "$dist_dir" ]; then
+    echo "destination directory $dest_dir doesn not exist"
+    exit 1 
+fi

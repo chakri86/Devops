@@ -20,7 +20,7 @@ if [ ! -d "$dest_dir" ]; then
     exit 1 
 fi
 
-files=$(find "$source_dir" -type f -name "*.log" -mtime +$days)
+files=$( find "$source_dir" -type f -name "*.log" -mtime +$days )
 
 
 if [ -z "$files" ]; then

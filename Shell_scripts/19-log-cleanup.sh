@@ -21,3 +21,16 @@ if [ ! -d $source_dir]; then
 
 fi
 
+echo "scanning $source_dir for log files older than 14  days"
+
+files_to_be=$(find $source_dir -name  "*.log" -type f -mtime +$days)
+
+if [ -z $files_to_be ]; then
+    echo " no logs files older than 14 days found"
+    exit 0
+fi
+
+while IFS= read -r file
+do 
+    echo "file to be deleted : $files_to_be"
+done <<< "$files_to_be"

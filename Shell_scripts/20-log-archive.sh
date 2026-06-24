@@ -31,4 +31,4 @@ fi
 while IFS= read -r file
 do
     echo "$file"
-done <<< "files"
+done <<< "$files"

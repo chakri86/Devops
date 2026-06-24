@@ -4,7 +4,7 @@ source_dir=$1
 dest_dir=$2
 days=${3:-14}
 
-time_stamp=$(date +%Y-%b-%d-%H:%M:%S)
+time_stamp=$(date +%Y-%b-%d-%H-%M-%S)
 archive_file="$dest_dir/log_archive-$time_stamp.tar.gz"
 
 

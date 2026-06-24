@@ -19,3 +19,16 @@ if [ ! -d "$dist_dir" ]; then
     echo "destination directory $dest_dir doesn not exist"
     exit 1 
 fi
+
+files=$(find "$source_dir" -type f -name "*.log" -mtime +$days)
+
+
+if [ -z "$files"]; then
+    echo "log files older than 14 days not found, nothing to do"
+    exit 0
+fi
+
+while IFS= read -r file
+do
+    echo "$file"
+done <<< "files"

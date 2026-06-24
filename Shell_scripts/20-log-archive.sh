@@ -23,7 +23,7 @@ fi
 files=$(find "$source_dir" -type f -name "*.log" -mtime +$days)
 
 
-if [ -z "$files"]; then
+if [ -z "$files" ]; then
     echo "log files older than 14 days not found, nothing to do"
     exit 0
 fi

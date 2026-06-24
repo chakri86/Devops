@@ -39,3 +39,18 @@ done <<< "$files"
 
 
 tar -czvf $archive_file $files
+
+if [ $? -eq 0 ]; then
+    echo "archive is success, deleting the files"
+    while IFS= read -r file
+    do
+        rm -f $file
+        echo "deleting file : $file"
+
+    done <<< "$files"
+else 
+    echo "error  archival is failed"
+    exit 1
+
+fi
+

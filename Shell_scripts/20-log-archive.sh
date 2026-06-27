@@ -49,7 +49,7 @@ if [ $? -eq 0 ]; then
 
     done <<< "$files"
 else 
-    echo "error  archival is failed"
+    echo "error :: archival is failed"
     exit 1
 
 fi

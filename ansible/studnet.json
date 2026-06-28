@@ -1,0 +1,43 @@
+{
+    "students":[
+        {
+            "firstname":"chakri",
+            "lastname":"ananthu",
+            "address":[
+                {
+                    "type":"actual",
+                    "street":"955",
+                    "block":"5304",
+                    "city":"dalls"
+                
+                },
+                {
+                "type":"mailling",
+                    "street":"955",
+                    "block":"5304",
+                    "city":"dalls" 
+                }
+            ]
+        },
+        {
+            "firstname":"chakri",
+            "lastname":"ananthu",
+            "address":[
+                {
+                    "type":"actual",
+                    "street":"955",
+                    "block":"5304",
+                    "city":"dalls"
+                
+                },
+                {
+                "type":"mailling",
+                    "street":"955",
+                    "block":"5304",
+                    "city":"dalls" 
+                }
+            ]
+        }
+    ]
+
+}

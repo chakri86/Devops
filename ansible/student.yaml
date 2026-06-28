@@ -1,0 +1,29 @@
+- name: "chakri"
+  dob: "05-08-1986"
+  mobile: "9618727341"
+  address:
+  - type: actaul
+    street: 955
+    block: 54304
+    city: "dallas"
+    
+  - type: mailling
+    street: 955
+    block: 54304
+    city: "dallas"
+
+- name: "chakri"
+  dob: "05-08-1986"
+  mobile: "9618727341"
+  address:
+  - type: actaul
+    street: 955
+    block: 54304
+    city: "dallas"
+  
+  - type: mailling
+    street: 955
+    block: 54304
+    city: "dallas"
+
+

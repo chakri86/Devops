@@ -1,0 +1,6 @@
+- name: demo on debug
+  hosts: fronend
+  tasks:
+    - name: hello world
+      debug: 
+        

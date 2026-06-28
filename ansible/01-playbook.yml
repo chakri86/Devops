@@ -2,4 +2,4 @@
   hosts: frontend #target server
   tasks: #tasks==module==colection
   - name: ping the server
-    ping:
+    ping: #ansible.builtin.ping

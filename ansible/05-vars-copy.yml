@@ -1,0 +1,14 @@
+- name: demo on variable
+  hosts: localhost
+  connection: local
+  vars:
+    course: ansible
+    trainer: siva
+    me: chakri
+    duration: 150
+  tasks:
+  - name: print information
+    vars: 
+      course: "devsecops a with ai ops"
+    debug:
+      msg: "hi iam learning {{course}}, my trainer is {{trainer}} and iam {{me}} duration is {{duration}} HRS"

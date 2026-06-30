@@ -1,0 +1,7 @@
+- name: demo vars from cmd
+  host: local
+  connection: local
+  task: 
+  - name:
+    debug:
+      msg: "hello {{name}}"

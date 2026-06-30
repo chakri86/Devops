@@ -1,4 +1,4 @@
-- name: demo vars from cmd
+- name: demo
   host: local
   connection: local
   task: 

@@ -12,7 +12,7 @@
 
   tasks:
   - name: printing information 
-      debug:
+    debug:
         msg: " user name is {{username}} and password is {{password}}"
 
       

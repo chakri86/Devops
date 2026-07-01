@@ -1,16 +1,16 @@
 - name: even or odd
   hosts: local
   connection: local
-  vars_prompt:
+  vars:
     - name: given_number
       prompt: "please enter a number"
       private: false
   tasks:
-  - name: check number is even or odd
+  - name: check number is even
     debug:
       msg: " the given number {{given_number}} is even"
     when: given_number % 2 == 0
-    
+
   - name: check number is odd
     debug:
       msg: " the given number {{given_number}} is odd"

@@ -1,9 +1,10 @@
 - name: even or odd
   hosts: local
   connection: local
-  vars:
-    number:
+  vars_prompt:
+    - name: number
       prompt: "please enter a number"
+      private: false
   tasks:
   - name: check number is even or odd
     debug:

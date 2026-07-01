@@ -2,9 +2,7 @@
   hosts: local
   connection: local
   vars:
-    - name: given_number
-      prompt: "please enter a number"
-      private: false
+    given_number: 5
   tasks:
   - name: check number is even
     debug:

@@ -1,0 +1,22 @@
+- name: course information
+  hosts: local
+  connection: local
+  vars:
+    course: "devsecops with ai ops" # string
+    duration_in_hrs: 150 # integer
+    is_live: true # boolean
+    topics:  # list
+      - ansible
+      - docker
+      - kubernetes
+      - terraform
+      - jenkins
+    more_details: #map/dictonary
+      trainer: siva # dictionary
+      location: hyderabad
+    tasks: 
+    - name: print course information
+      debug:
+        msg: "hi iam learning {{course}}, duration is {{duration_in_hrs}} HRS, is_live: {{is_live}}, topics: {{topics}}, more_details: {{more_details}}"  
+        
+          

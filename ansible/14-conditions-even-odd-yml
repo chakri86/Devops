@@ -2,7 +2,8 @@
   hosts: local
   connection: local
   vars:
-    number: 5
+    number:
+      prompt: "please enter a number"
   tasks:
   - name: check number is even or odd
     debug:

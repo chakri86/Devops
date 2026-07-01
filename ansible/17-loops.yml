@@ -3,10 +3,8 @@
   become: yes
   tasks:
   - name: install packages
-    package:
-      name: "{{item}}"
-      state: present
+    package: present
     loop:
       - nginx
-      - msql
+      - mysql
       - git

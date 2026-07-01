@@ -6,5 +6,5 @@
   tasks:
   - name: is ansible more than 5 sessions
     debug:
-      msg: "yes, there are more than 5 live sessions"
-    when: live_sessions > 5
+      msg: "yes, there are more than 10 live sessions"
+    when: live_sessions > 10

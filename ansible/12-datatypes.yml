@@ -14,9 +14,9 @@
     more_details: #map/dictonary
       trainer: siva # dictionary
       location: hyderabad
-    tasks: 
-    - name: print course information
-      debug:
-        msg: "hi iam learning {{course}}, duration is {{duration_in_hrs}} HRS, is_live: {{is_live}}, topics: {{topics}}, more_details: {{more_details}}"  
-        
-          
+  tasks: 
+  - name: print course information
+    debug:
+      msg: "hi iam learning {{course}}, duration is {{duration_in_hrs}} HRS, is_live: {{is_live}}, topics: {{topics}}, more_details: {{more_details}}"  
+
+

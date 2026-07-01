@@ -18,5 +18,11 @@
   - name: print course information
     debug:
       msg: "hi iam learning {{course}}, duration is {{duration_in_hrs}} HRS, is_live: {{is_live}}, topics: {{topics}}, more_details: {{more_details}}"  
-
-
+  - name: printing cousre information
+    debug:
+      msg: |
+        Course: {{course}}
+        Duration: {{duration_in_hrs}} HRS
+        Is Live: {{is_live}}
+        Topics: {{topics}}
+        more_details: {{more_details}}  

@@ -3,5 +3,10 @@
   connection: local
   tasks:
   - name: command test
-    #ommand: cat /etc/passwd | grep root
+    #command: cat /etc/passwd | grep root
     shell: cat /etc/passwd | grep root
+    register: result_output
+
+  - name: print result
+    debug:
+      msg: "{{ result_output}}"

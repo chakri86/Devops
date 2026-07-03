@@ -9,7 +9,7 @@
       environment: dev
     tagsList:  [{'key': 'name', 'value': 'ansible'}, {'key': 'project', 'value': 'roboshop'}, {'key': 'environment', 'value': 'dev'}]
     fullname: A V K CHakravarthi
-    ip_address: 1000.10000.1520.1455
+    ip_address: 127.25.56.85
   tasks: 
   - name: convert string to list
     debug:

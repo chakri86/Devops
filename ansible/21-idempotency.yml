@@ -1,0 +1,9 @@
+- name: create user
+  become: yes
+  hosts: local
+  connection: local
+  tasks: 
+  - name: create expense user
+    user: 
+      name: expense
+      

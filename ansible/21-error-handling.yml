@@ -4,3 +4,10 @@
   tasks:
   - name: check roboshop user exist or not
     command: id roboshop
+    register: user_check
+    ignore_error: true
+
+  - name: print user_check
+    debug:
+      msg: "{{ user_cehck }}"
+    

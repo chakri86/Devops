@@ -28,4 +28,4 @@
 
   - name: convert string to uppercase
     debug:
-      msg: "full name is {{ fullname | uppercase}}"
+      msg: "full name is {{ fullname | upper }}"

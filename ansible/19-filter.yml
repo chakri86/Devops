@@ -9,6 +9,7 @@
       environment: dev
     tagsList:  [{'key': 'name', 'value': 'ansible'}, {'key': 'project', 'value': 'roboshop'}, {'key': 'environment', 'value': 'dev'}]
     fullname: A V K CHakravarthi
+    ip_address: 1000.10000.1520.1455
   tasks: 
   - name: convert string to list
     debug:
@@ -32,4 +33,8 @@
 
   - name: convert string to lowercase
     debug:
-      msg: "full name is {{ fullname | lower }}"    
+      msg: "full name is {{ fullname | lower }}" 
+
+  - name: check ip address is valid or not 
+    debug:
+      msg: "ip address is {{ ip_address | ansible.utils.ipv4 }}"   

@@ -10,4 +10,7 @@
   - name: print user_check
     debug:
       msg: "{{ user_check }}"
-    
+
+  - naem: create user
+    command: useradd robishop
+    when: user_check.rc !=0

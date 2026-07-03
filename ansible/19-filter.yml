@@ -8,6 +8,7 @@
       project: roboshop
       environment: dev
     tagsList:  [{'key': 'name', 'value': 'ansible'}, {'key': 'project', 'value': 'roboshop'}, {'key': 'environment', 'value': 'dev'}]
+    fullname: A V K CHakravarthi
   tasks: 
   - name: convert string to list
     debug:
@@ -23,4 +24,8 @@
 
   - name: convert list to map
     debug:
-      msg: "tagMap is {{ tagsList | items2dict }}"
+      msg: "tagsList is {{ tagsList | items2dict }}"
+
+  - name: convert string to uppercase
+    debug:
+      msg: "full name is {{ fullname | uppercase}}"

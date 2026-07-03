@@ -12,5 +12,4 @@
       msg: "{{ result_output}}"
 
   - name: list files
-    command: ls -ltr > /tmp/file.txt
-    
+    shell: ls -ltr > /tmp/file.txt

@@ -29,3 +29,7 @@
   - name: convert string to uppercase
     debug:
       msg: "full name is {{ fullname | upper }}"
+
+  - name: convert string to lowercase
+    debug:
+      msg: "full name is {{ fullname | lower }}"    

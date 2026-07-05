@@ -29,4 +29,4 @@
           configure_priv: .*
           write_priv: .*
           read_priv: .*
-      tags: administrator
+      

@@ -2,7 +2,7 @@
   hosts: local
   connection: local
   vars:
-    instances: ["mongodb", "redis", "mysql", "rabbitmq"]
+    instances: ["mongodb", "redis", "mysql", "rabbitmq", "frontend"]
     image_id: ami-0220d79f3f480ecf5
     domine_name: avkc.online
     action: create
@@ -50,10 +50,12 @@
       value: "{{ item.instances[0].public_ip_address }}"
       overwrite: true
     loop: "{{ ec2_output.results }}"
-    when: action == "create" && item.item == "frontend"
+    when: 
+    - action == "create" 
+    - item.item == "frontend"
 
 
-  - name: delete-R53-records
+  - name: delete-r53-records
     amazon.aws.route53:
       state: absent
       zone: "{{ domine_name }}"
@@ -63,7 +65,7 @@
     loop: "{{ instances }}"
     when: action == "delete"
 
-  - name: delete-R53-records-frontend
+  - name: delete-r53-records-frontend
     amazon.aws.route53:
       state: absent
       zone: "{{ domine_name }}"
@@ -71,5 +73,7 @@
       type: A
       ttl: 1
     loop: "{{ instances }}"
-    when: action == "delete" && item == "frontend"
+    when: 
+    - action == "delete" 
+    - item == "frontend"
     

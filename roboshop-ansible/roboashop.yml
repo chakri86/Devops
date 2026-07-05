@@ -11,10 +11,10 @@
       name: "roboshop-{{ item }}"
       image_id: "{{ image_id }}"
       security_groups: 
-        - "roboshop-{{ item }}"
-        - roboshop-common
-      loop: "{{ instances }}"
-      register: ec2-output
+      - "roboshop-{{ item }}"
+      - roboshop-common
+    loop: "{{ instances }}"
+    register: ec2-output
 
   - name: print ec2-output
     debug:

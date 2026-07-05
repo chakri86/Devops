@@ -4,6 +4,7 @@
   vars:
     instances: ["mongodb", "redis", "mysql", "rabbitmq"]
     image_id: ami-0220d79f3f480ecf5
+    domine_name: avkc.online
   tasks:  
   - name: create-ec2-instances
     amazon.aws.ec2_instance:
@@ -20,7 +21,30 @@
   #   debug:
   #     msg: "{{ ec2_output }}"
 
+  # - name: create route53 record
+  #   debug:
+  #     msg: " Instance name is : {{ item.item }} and private ip is : {{ item.instances[0].private_ip_address }}"   
+  #   loop: "{{ ec2_output.results }}"   
+
   - name: create route53 record
-    debug:
-      msg: " Instance name is : {{ item.item }} and private ip is : {{ item.instances[0].private_ip_address }}"   
-    loop: "{{ ec2_output.results }}"   
+    amazon.aws.route53:
+      satate: present
+      zone: "{{ domine_name }}"
+      record: "{{ item.item }}.{{ domine_name }}"
+      type: A
+      ttl: 1
+      value: "{{ item.instances[0].private_ip_address }}"
+    loop: "{{ ec2_output.results }}"
+
+  - name: create route53 record for frontend
+    amazon.aws.route53:
+      satate: present
+      zone: "{{ domine_name }}"
+      record: "{{ item.item }}.{{ domine_name }}"
+      type: A
+      ttl: 1
+      value: "{{ item.instances[0].public_ip_address }}"
+    loop: "{{ ec2_output.results }}"
+    when: item.item == "frontend"
+    
+    

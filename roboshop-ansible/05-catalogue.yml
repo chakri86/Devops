@@ -68,11 +68,18 @@
       name: monogdb-mongosh
       state: present
 
-  - name: load products
-    community.mongodb.mongodb_shell:
-      login_host: "{{ MONGODB_HOST }}"
-      file: "/app/db/master-data.js"
-      idempotent: yes
+  - name: check catalogue schema exist or not 
+    shell: mongosh --host mongodb.avkc.online --eval 'db.getMongo().getDBNames().indexOf("catalouge")'
+    register: catalogue_output
+    tags: 
+      - mongodb
+
+  - name: print catalogue
+    debug: 
+      msg: {{ catalogue_output }}
+    tags: 
+      - mongodb
+    
 
 
 

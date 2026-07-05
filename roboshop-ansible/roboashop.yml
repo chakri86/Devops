@@ -14,8 +14,8 @@
       - "roboshop-{{ item }}"
       - roboshop-common
     loop: "{{ instances }}"
-    register: ec2-output
+    register: ec2_output
 
   - name: print ec2-output
     debug:
-      msg: "{{ ec2-output }}"
+      msg: "{{ ec2_output }}"

@@ -1,0 +1,49 @@
+- name:  configuring catalogue server
+  hosts: catalogue
+  become: yes
+  tasks: 
+
+  - name: disable nodejs default module
+    command: dnf module disable nodejs -y
+
+  - name: enable nodejs 20.x module
+    command: dnf module enable nodejs:20 -y
+
+  - name: install nodejs in server
+    package:
+      name: nodejs
+      state: present
+
+  - name: create system user for catalogue
+    user:
+      name: roboshop
+      system: yes
+      home: /app
+      shell: /sbin/nologin
+      state: present
+      comment: "Roboshop system user"
+   
+  - name: remove app directory if already exists
+    file:
+      path: /app
+      state: absent
+
+  - name: delete catalogue.zip in in tmo directiry
+    file: 
+      path: /tmp/catalogue.zip
+      state: absent
+
+  - name: create app directory
+    file: 
+      path: /app
+      state: directory
+
+  - name: download catalogue
+    get_url:
+      url: https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip
+      dest: /tmp/catalogue.zip
+
+  - name: unzipping the catalogue
+    unarchive: 
+      src: /tmp/catalogue.zip    
+      dest:  /app

@@ -65,7 +65,7 @@
 
   - name: install mongodb client
     package: 
-      name: mongdb-mongosh
+      name: mongodb-mongosh
       state: present
 
   - name: check catalogue schema exist ot not

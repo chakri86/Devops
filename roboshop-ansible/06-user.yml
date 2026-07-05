@@ -14,7 +14,7 @@
       name: nodejs
       state: present
 
-  - name: create system user for catalogue
+  - name: create system user for user
     user:
       name: roboshop
       system: yes
@@ -41,7 +41,7 @@
   - name: download users
     get_url:
       url: https://roboshop-artifacts.s3.amazonaws.com/user-v3.zip
-      dest: /tmp/catalogue.zip
+      dest: /tmp/user.zip
 
   - name: unzipping the user
     unarchive: 

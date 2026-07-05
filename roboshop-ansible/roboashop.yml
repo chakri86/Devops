@@ -28,7 +28,7 @@
 
   - name: create route53 record
     amazon.aws.route53:
-      satate: present
+      state: present
       zone: "{{ domine_name }}"
       record: "{{ item.item }}.{{ domine_name }}"
       type: A
@@ -38,7 +38,7 @@
 
   - name: create route53 record for frontend
     amazon.aws.route53:
-      satate: present
+      state: present
       zone: "{{ domine_name }}"
       record: "{{ item.item }}.{{ domine_name }}"
       type: A
@@ -46,5 +46,5 @@
       value: "{{ item.instances[0].public_ip_address }}"
     loop: "{{ ec2_output.results }}"
     when: item.item == "frontend"
-    
+
     

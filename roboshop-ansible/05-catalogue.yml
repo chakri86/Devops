@@ -65,7 +65,7 @@
 
   - name: install mongodb client
     package: 
-      name: monogdb-mongosh
+      name: mongdb-mongosh
       state: present
 
   - name: check catalogue schema exist ot not
@@ -73,7 +73,7 @@
     register: catalogue_output
     tags:
     - mongodb
-    
+
   - name: print catalogue_output
     debug: 
       msg: "{{ catalogue_output }}"

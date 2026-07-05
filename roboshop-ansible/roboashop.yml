@@ -2,7 +2,7 @@
   hosts: local
   connection: local
   vars:
-    instances: ["mongodb", "redis", "mysql", "rabbitmq" ]
+    instances: ["mongodb", "redis", "mysql", "rabbitmq"]
     image_id: ami-0220d79f3f480ecf5
   tasks:  
   - name: create ec2 instances

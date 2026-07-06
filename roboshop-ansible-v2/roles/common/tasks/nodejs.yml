@@ -1,0 +1,14 @@
+- name: disable nodejs default module
+  command: dnf module disable nodejs -y
+
+- name: enable nodejs 20.x module
+  command: dnf module enable nodejs:20 -y
+
+- name: install nodejs in server
+  package:
+    name: nodejs
+    state: present
+
+- name: install npm
+  community.general.npm:
+    path: /app

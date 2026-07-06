@@ -59,10 +59,15 @@
   - name: copy shipping service
     template: 
       src: shipping.service.j2
-      dest: /etc/systemd/system/shipping.service    
+      dest: /etc/systemd/system/shipping.service 
+
+  - name: install python dependencies
+    pip: 
+      name: PyMySQL
+      executable: pip3.9
 
   - name: load mysql data
-    ansible.mysql.mysql_db:
+    community.mysql.mysql_db:
       state: import
       name: all
       login_user: root

@@ -3,10 +3,13 @@
   become: yes
   tasks: 
 
-  - name: install maven
+  - name: install maven and mysql
     package:
-      name: maven
+      name: "{{ item }}"
       state: present
+    loop: 
+      - maven
+      - mysql  
   
   - name: create system user for shipping
     user:
@@ -51,9 +54,22 @@
   - name: move shipping jar
     command: mv target/shipping-1.0.jar shipping.jar 
     args:
-      chir: /app    
+      chdir: /app    
 
   - name: copy shipping service
     template: 
       src: shipping.service.j2
       dest: /etc/systemd/system/shipping.service    
+
+  - name: load mysql data
+    ansible.mysql.mysql_db:
+      state: import
+      name: all
+      login_user: root
+      login_password: Roboshop@1
+      login_host: "{{ MYSQL_HOST }}"
+      target: 
+    loop: 
+      - /app/db/schema.sql
+      - /app/db/app-user.sql 
+      - /app/db/master-data.sql   

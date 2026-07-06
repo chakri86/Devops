@@ -9,3 +9,4 @@ USER_HOST: user.avkc.online
 RABBITMQ_HOST: rabbitnq.avkc.online
 PAYMENT_HOST: payment.avkc.online
 FRONTEND_HOST: frontend.avkc.online
+SHIPPING_HOST: shipping.avkc.online

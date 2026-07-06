@@ -1,0 +1,12 @@
+ansible_user: ec2-user
+ansible_password: DevOps321
+MONGODB_HOST: mongodb.avkc.online
+REDIS_HOST: redis.avkc.online
+CATALOGUE_HOST: catalogue.avkc.online
+CART_HOST: cart.avkc.online
+MYSQL_HOST: mysql.avkc.online
+USER_HOST: user.avkc.online
+RABBITMQ_HOST: rabbitnq.avkc.online
+PAYMENT_HOST: payment.avkc.online
+FRONTEND_HOST: frontend.avkc.online
+SHIPPING_HOST: shipping.avkc.online

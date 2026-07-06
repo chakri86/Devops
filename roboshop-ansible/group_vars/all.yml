@@ -3,3 +3,6 @@ ansible_password: DevOps321
 MONGODB_HOST: mongodb.avkc.online
 REDIS_HOST: redis.avkc.online
 CATALOGUE_HOST: catalogue.avkc.online
+CART_HOST: cart.avkc.online
+MYSQL_HOST: mysql.avkc.online
+USER_HOST: user.avkc.online

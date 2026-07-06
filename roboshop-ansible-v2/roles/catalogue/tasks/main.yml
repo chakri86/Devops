@@ -1,0 +1,95 @@
+
+- name: disable nodejs default module
+  command: dnf module disable nodejs -y
+
+- name: enable nodejs 20.x module
+  command: dnf module enable nodejs:20 -y
+
+- name: install nodejs in server
+  package:
+    name: nodejs
+    state: present
+
+- name: create system user for catalogue
+  user:
+    name: roboshop
+    system: yes
+    home: /app
+    shell: /sbin/nologin
+    state: present
+    comment: "Roboshop system user"
+  
+- name: remove app directory if already exists
+  file:
+    path: /app
+    state: absent
+
+- name: delete catalogue.zip in in tmo directiry
+  file: 
+    path: /tmp/catalogue.zip
+    state: absent
+
+- name: create app directory
+  file: 
+    path: /app
+    state: directory
+
+- name: download catalogue
+  get_url:
+    url: https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip
+    dest: /tmp/catalogue.zip
+
+- name: unzipping the catalogue
+  unarchive: 
+    src: /tmp/catalogue.zip    
+    dest:  /app
+    remote_src: yes
+
+- name: install npm
+  community.general.npm:
+    path: /app
+
+- name: copy catalogue service
+  template: 
+    src: catalogue.service.j2
+    dest: /etc/systemd/system/catalogue.service
+
+- name: copy mongodb.repo file
+  copy:
+    src: mongo.repo
+    dest: /etc/yum.repos.d/mongo.repo 
+
+- name: install mongodb client
+  package: 
+    name: mongodb-mongosh
+    state: present
+
+- name: check catalogue schema exist ot not
+  shell: mongosh --host "{{ MONGODB_HOST }}" --eval 'db.getMongo().getDBNames().indexOf("catalogue")'
+  register: catalogue_output
+  tags:
+  - mongodb
+
+- name: print catalogue_output
+  debug: 
+    msg: "{{ catalogue_output }}"
+  tags:
+  - mongodb
+
+- name: load products 
+  shell: mongosh --host "{{ MONGODB_HOST }}" </app/db/master-data.js
+  when: catalogue_output.stdout | int < 0
+  tags:
+  - mongodb
+
+- name: deamon reload
+  systemd_service:
+    name: catalogue
+    daemon_reload: true
+    
+- name: enable and start catalogue
+  service:
+    name: catalogue
+    state: restarted
+    enabled: yes
+
